@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Docz | Login Sesc DF</title>
+    <style>
+        :root {
+            /* Cores Institucionais Sesc DF */
+            --azul-sesc: #005baa;
+            --azul-hover: #004a8f;
+            --laranja-sesc: #f39200;
+            --fundo-pagina: #f4f7f9;
+            --fundo-card: #ffffff;
+            --fundo-input: #fafafa;
+            --cor-borda: #dcdcdc;
+            --cor-texto: #444444;
+            --cor-label: #555555;
+            --cor-subtexto: #999999;
+            --erro-cor: #e74c3c;
+            --erro-fundo: #fdf2f2;
+        }
+
+        [data-theme="dark"] {
+            --fundo-pagina: #121415;
+            --fundo-card: #1e2122;
+            --fundo-input: #282b2c;
+            --cor-borda: #333638;
+            --cor-texto: #e0e0e0;
+            --cor-label: #bbbbbb;
+            --cor-subtexto: #777777;
+            --erro-fundo: #2c1a1a;
+        }
+
+        html, body { height: 100%; margin: 0; padding: 0; transition: background-color 0.3s ease; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: var(--fundo-pagina); color: var(--cor-texto); display: flex; flex-direction: column; }
+
+        .main-content { flex: 1; display: flex; justify-content: center; align-items: center; padding: 20px; }
+        .login-wrapper { width: 100%; max-width: 400px; text-align: center; }
+
+        .logo-docz { margin-bottom: 25px; cursor: pointer; user-select: none; }
+        .logo-docz img { max-width: 170px; height: auto; transition: filter 0.3s ease; }
+        [data-theme="dark"] .logo-docz img { filter: brightness(0) invert(1) opacity(0.9); }
+
+        .login-card {
+            background: var(--fundo-card); padding: 35px; border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05); border: 1px solid var(--cor-borda);
+            transition: all 0.3s ease; min-height: 380px; display: flex; flex-direction: column; justify-content: center; position: relative;
+        }
+
+        .alerta-central {
+            background: var(--erro-cor);
+            color: white;
+            padding: 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            display: none;
+            text-align: center;
+            animation: fadeIn 0.3s;
+        }
+
+        .form-group { text-align: left; margin-bottom: 18px; position: relative; }
+        .form-group label { display: block; font-weight: 600; font-size: 13px; margin-bottom: 6px; color: var(--cor-label); }
+        
+        .form-group input { 
+            width: 100%; padding: 12px; border: 1px solid var(--cor-borda); border-radius: 4px; 
+            font-size: 14px; box-sizing: border-box; background-color: var(--fundo-input); color: var(--cor-texto); transition: all 0.2s ease; 
+        }
+        
+        .form-group input.input-erro {
+            border-color: var(--erro-cor) !important;
+            background-color: var(--erro-fundo) !important;
+        }
+
+        .form-group input:focus { border-color: var(--azul-sesc); outline: none; background-color: var(--fundo-card); }
+        
+        .link-recuperar { display: block; text-align: right; margin-top: 5px; font-size: 12px; color: var(--azul-sesc); text-decoration: none; font-weight: 600; cursor: pointer; }
+
+        .btn-entrar { width: 100%; padding: 14px; background-color: var(--azul-sesc); color: #ffffff; border: none; border-radius: 4px; font-weight: bold; text-transform: uppercase; cursor: pointer; margin-top: 10px; transition: 0.2s; }
+        .btn-entrar:hover { background-color: var(--azul-hover); }
+
+        .btn-certificado { width: 100%; padding: 12px; background-color: var(--laranja-sesc); color: #ffffff; border: none; border-radius: 4px; font-weight: bold; text-transform: uppercase; cursor: pointer; margin-top: 12px; font-size: 11px; text-decoration: none; display: inline-block; box-sizing: border-box; }
+
+        #recoveryView { display: none; text-align: center; animation: fadeIn 0.4s; }
+        .pergunta-texto { font-size: 16px; font-weight: 500; margin-bottom: 25px; line-height: 1.4; }
+        .botoes-confirmacao { display: flex; gap: 10px; }
+        .btn-confirmar { flex: 1; background-color: var(--azul-sesc); color: white; border: none; padding: 12px; border-radius: 4px; font-weight: bold; cursor: pointer;}
+        .btn-cancelar { flex: 1; background-color: #eee; color: #333; border: none; padding: 12px; border-radius: 4px; font-weight: bold; cursor: pointer;}
+        [data-theme="dark"] .btn-cancelar { background-color: #333; color: #eee; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
+
+        .formRow { margin-top: 25px; padding-top: 15px; border-top: 1px solid var(--cor-borda); }
+        .formRow span { display: block; margin-bottom: 10px; font-size: 11px; color: var(--cor-subtexto); font-weight: bold; text-transform: uppercase; letter-spacing: 1px; }
+        .icon-container { display: flex; justify-content: center; align-items: center; gap: 10px; }
+        .link-icon-detail img { transition: 0.2s; opacity: 0.8; }
+        .link-icon-detail:hover img { transform: scale(1.1); opacity: 1; }
+
+        footer { background-color: var(--fundo-card); padding: 20px; text-align: center; font-size: 11px; color: var(--cor-subtexto); border-top: 1px solid var(--cor-borda); line-height: 1.8; }
+        .version-info { font-family: 'Courier New', Courier, monospace; font-size: 10px; }
+    </style>
+</head>
+<body data-theme="light">
+
+    <div class="main-content">
+        <div class="login-wrapper">
+            <div class="logo-docz" id="logoToggle" title="Clique para Alternar Modo Escuro">
+                <img src="https://docz.sosdocs.com.br/Docz/images/logo.png" alt="Docz">
+            </div>
+
+            <div class="login-card">
+                <div id="alertaGeral" class="alerta-central"></div>
+
+                <div id="loginView">
+                    <form id="formDocz">
+                        <div class="form-group">
+                            <label>Cliente:</label>
+                            <input type="text" id="cliente" value="" placeholder="Informe o cliente">
+                        </div>
+                        <div class="form-group">
+                            <label>Usuário:</label>
+                            <input type="text" id="usuario" placeholder="CPF ou E-mail">
+                        </div>
+                        <div class="form-group">
+                            <label>Senha:</label>
+                            <input type="password" id="senha" placeholder="••••••••">
+                            <a id="linkRecuperar" class="link-recuperar">Recuperar Senha</a>
+                        </div>
+                        <button type="submit" class="btn-entrar">Entrar</button>
+                        <a href="#" class="btn-certificado">Entrar com Certificado Digital</a>
+                    </form>
+                </div>
+
+                <div id="recoveryView">
+                    <div id="perguntaTexto" class="pergunta-texto">Confirma a recuperação da senha?</div>
+                    <div id="botoesAcao" class="botoes-confirmacao">
+                        <button class="btn-cancelar" id="btnNao">Não</button>
+                        <button class="btn-confirmar" id="btnSim">Sim</button>
+                    </div>
+                    <button class="btn-entrar" id="btnOkFinal" style="display:none">OK</button>
+                </div>
+
+                <div class="formRow" id="contatosBloco">
+                    <span>Fale Conosco:</span>
+                    <div class="icon-container">
+                        <a href="tel:08005911478" class="link-icon-detail"><img src="https://cdn-icons-png.flaticon.com/512/724/724664.png" width="40" height="40"></a>
+                        <a href="mailto:atendimento@sosdocs.com.br" class="link-icon-detail"><img src="https://cdn-icons-png.flaticon.com/512/561/561127.png" width="40" height="40"></a>
+                        <a href="https://wa.me/558005911478" class="link-icon-detail"><img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" width="40" height="40"></a>
+                        <a href="#" class="link-icon-detail"><img src="https://cdn-icons-png.flaticon.com/512/1380/1380370.png" width="40" height="40"></a>
+                    </div>
+                </div> 
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div>Software: <b>Docz</b> - Fornecedor: <b>SOS DOCS (SOS Tecnologia e Gestão da Informação)</b></div>
+        <div>© Copyright 2026. Todos os Direitos Reservados. <span class="version-info">Docz v:2026.03.17.12.1.5.15.8f (SRV:docz-app-f5bb794c9-dfs56)</span></div>
+    </footer>
+
+    <script>
+        const alertaGeral = document.getElementById('alertaGeral');
+        const loginView = document.getElementById('loginView');
+        const recoveryView = document.getElementById('recoveryView');
+        const contatosBloco = document.getElementById('contatosBloco');
+        
+        const inputCliente = document.getElementById('cliente');
+        const inputUsuario = document.getElementById('usuario');
+        const inputSenha = document.getElementById('senha');
+        const inputs = [inputCliente, inputUsuario, inputSenha];
+
+        function exibirAlerta(msg) {
+            alertaGeral.innerText = msg;
+            alertaGeral.style.display = 'block';
+            setTimeout(() => { alertaGeral.style.display = 'none'; }, 3000);
+        }
+
+        inputs.forEach(input => {
+            input.addEventListener('input', () => input.classList.remove('input-erro'));
+        });
+
+        document.getElementById('formDocz').addEventListener('submit', (e) => {
+            e.preventDefault();
+            let erro = false;
+            inputs.forEach(input => {
+                if (input.value.trim() === "") {
+                    input.classList.add('input-erro');
+                    erro = true;
+                }
+            });
+            if (erro) {
+                exibirAlerta("Alerta: Todos os campos devem ser preenchidos");
+            } else {
+                alert("Login realizado com sucesso!");
+            }
+        });
+
+        document.getElementById('linkRecuperar').addEventListener('click', (e) => {
+            e.preventDefault();
+            if (inputUsuario.value.trim() === "") {
+                inputUsuario.classList.add('input-erro');
+                exibirAlerta("Alerta: O campo Usuário deve ser preenchido");
+                return;
+            }
+            loginView.style.display = "none";
+            contatosBloco.style.display = "none";
+            recoveryView.style.display = "block";
+        });
+
+        document.getElementById('btnNao').addEventListener('click', () => {
+            recoveryView.style.display = "none";
+            loginView.style.display = "block";
+            contatosBloco.style.display = "block";
+        });
+
+        document.getElementById('btnSim').addEventListener('click', () => {
+            document.getElementById('perguntaTexto').innerText = "Alerta: Se o e-mail for válido, você receberá uma nova senha de acesso.";
+            document.getElementById('botoesAcao').style.display = "none";
+            document.getElementById('btnOkFinal').style.display = "block";
+        });
+
+        document.getElementById('btnOkFinal').addEventListener('click', () => {
+            recoveryView.style.display = "none";
+            loginView.style.display = "block";
+            contatosBloco.style.display = "block";
+            document.getElementById('botoesAcao').style.display = "flex";
+            document.getElementById('btnOkFinal').style.display = "none";
+            document.getElementById('perguntaTexto').innerText = "Confirma a recuperação da senha?";
+        });
+
+        document.getElementById('logoToggle').addEventListener('click', () => {
+            const currentTheme = document.body.getAttribute('data-theme');
+            document.body.setAttribute('data-theme', currentTheme === 'light' ? 'dark' : 'light');
+        });
+    </script>
+</body>
+</html>
