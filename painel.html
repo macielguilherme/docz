@@ -3,10 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Docz | Gestão Documental</title>
+    <title>Docz | Gestão Documental + Analytics</title>
     <style>
         :root {
-            /* Cores Institucionais Sesc DF */
             --azul-sesc: #005baa;
             --azul-hover: #004a8f;
             --laranja-sesc: #f39200;
@@ -35,7 +34,7 @@
         html, body { height: 100%; margin: 0; padding: 0; transition: background-color 0.3s ease; }
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: var(--fundo-pagina); color: var(--cor-texto); display: flex; overflow: hidden; }
 
-        /* --- Controle Lateral Centralizado (Seta SVG) --- */
+        /* --- Controle Lateral Centralizado --- */
         #leftControl {
             position: fixed;
             top: 50%;
@@ -61,7 +60,7 @@
 
         #leftControl svg { width: 14px; height: 14px; fill: white; transition: transform 0.4s ease; }
 
-        /* --- Estrutura da Sidebar (SIDEBAR COMPLETA) --- */
+        /* --- Sidebar Completa --- */
         #leftSide {
             width: var(--sidebar-width);
             background-color: var(--fundo-sidebar);
@@ -82,7 +81,7 @@
         .sidebar-hidden #leftControl { left: 0; }
         .sidebar-hidden #leftControl svg { transform: rotate(180deg); }
 
-        /* Logo aciona o Modo Dark */
+        /* Logo - aciona modo dark */
         .logo-container { padding: 30px 20px; text-align: center; cursor: pointer; }
         .logo-container img { max-width: 150px; transition: filter 0.3s; }
         [data-theme="dark"] .logo-container img { filter: brightness(0) invert(1) opacity(0.9); }
@@ -90,14 +89,14 @@
         .sidebarSep { height: 1px; background: var(--cor-borda); margin: 10px 20px; opacity: 0.5; }
         .mt0 { margin-top: 0; }
 
-        /* Pesquisa Moderna */
+        /* Pesquisa na sidebar */
         .sidebarSearch { padding: 10px 20px; position: relative; }
         .sidebarSearch input[type="text"] {
             width: 100%; padding: 10px 15px; border-radius: 8px; border: 1px solid var(--cor-borda);
             background: var(--fundo-input); color: var(--cor-texto); font-size: 13px; box-sizing: border-box; outline: none;
         }
 
-        /* Navegação COMPLETA */
+        /* Navegação Completa */
         .nav { list-style: none; padding: 0; margin: 0; }
         .nav > li { border-bottom: 1px solid var(--cor-borda); }
         .nav > li > a {
@@ -117,7 +116,7 @@
         }
         .sub li a:hover { color: var(--azul-sesc); background: var(--fundo-sidebar); }
 
-        /* Perfil Otimizado */
+        /* Perfil Completo */
         .sideProfile { padding: 15px 20px; border-top: 1px solid var(--cor-borda); margin-top: auto; }
         .profile-status-demo { font-size: 10px; font-weight: 800; color: var(--laranja-sesc); text-transform: uppercase; margin-bottom: 8px; display: block; letter-spacing: 1px; }
         
@@ -138,7 +137,7 @@
         .sideDropdown li a:hover { background: var(--fundo-input); color: var(--azul-sesc); }
         .sideDropdown li a svg { width: 14px; height: 14px; fill: currentColor; }
 
-        /* Botões Dinamica Caixa */
+        /* Botões Dinâmica */
         .sButton {
             display: flex; align-items: center; gap: 8px; margin: 4px 20px; padding: 10px;
             background: var(--azul-sesc); color: white; border-radius: 6px; text-decoration: none;
@@ -153,24 +152,25 @@
 
         .sidebar-footer { padding: 15px 20px; font-size: 9px; color: var(--cor-subtexto); border-top: 1px dashed var(--cor-borda); background: var(--fundo-input); }
 
-        /* --- CONTEÚDO PRINCIPAL - AGORA COM WIDGET DE FILTRO LARGO E BAIXO --- */
+        /* --- CONTEÚDO PRINCIPAL --- */
         .main-content { 
             flex-grow: 1;
-            padding: 20px; 
+            padding: 25px; 
             display: flex; 
             flex-direction: column; 
             overflow-y: auto; 
             transition: all 0.3s ease;
+            gap: 20px;
         }
 
-        /* WIDGET FILTRO LARGO E BAIXO (copiado do primeiro arquivo) */
+        /* WIDGET FILTRO LARGO E BAIXO (do primeiro arquivo) */
         .widget {
             width: 100%;
             background: var(--fundo-card);
             border: 1px solid var(--cor-borda);
             border-radius: 8px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-            margin-bottom: 20px;
+            margin-bottom: 0;
         }
 
         .widget .title {
@@ -185,7 +185,6 @@
         .widget .title h6 { margin: 0; font-size: 12px; font-weight: 700; color: var(--azul-sesc); text-transform: uppercase; }
         .titleIcon { width: 14px; opacity: 0.6; fill: var(--azul-sesc); }
 
-        /* Grid do Filtro para ficar baixo e largo */
         .widget .body { 
             padding: 12px 15px; 
             display: grid; 
@@ -226,7 +225,86 @@
 
         .info-nota { grid-column: 1 / -1; font-size: 10px; color: var(--cor-subtexto); margin-top: 5px; border-top: 1px dashed var(--cor-borda); padding-top: 8px; }
 
-        /* Pequeno ajuste responsivo */
+        /* Grid de Dashboards (gráficos do terceiro arquivo) */
+        .dashboard-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 20px; width: 100%; }
+        
+        .widget-chart {
+            width: 100%;
+            background: var(--fundo-card);
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+            overflow: hidden;
+            border: 1px solid var(--cor-borda);
+            display: flex;
+            flex-direction: column;
+            min-height: 360px;
+        }
+        .widget-chart .title {
+            padding: 12px 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 1px solid var(--cor-borda);
+            background: var(--fundo-input);
+        }
+        .widget-chart .title h6 {
+            margin: 0;
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--azul-sesc);
+            text-transform: uppercase;
+            flex-grow: 1;
+            letter-spacing: 0.8px;
+        }
+
+        .chart-wrap {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 15px;
+            position: relative;
+        }
+
+        /* Tabela e gráficos */
+        .sTable { border-collapse: collapse; font-size: 12px; width: 100%; }
+        .sTable thead td { background: var(--fundo-input); color: var(--cor-label); font-weight: 700; text-transform: uppercase; padding: 10px 15px; }
+        .sTable tbody td { padding: 12px 15px; border-bottom: 1px solid var(--cor-borda); color: var(--cor-texto); }
+        .statsPercent { color: #27ae60; font-weight: 700; }
+        .pizza-slice { cursor: pointer; transition: opacity 0.2s; }
+        .pizza-slice:hover { opacity: 0.85; }
+
+        /* Tooltip */
+        #chart-tooltip {
+            position: fixed;
+            padding: 8px 12px;
+            background: var(--azul-sesc);
+            color: #fff;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 700;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.2s;
+            z-index: 9999;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+        #chart-tooltip::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -6px;
+            border-width: 6px;
+            border-style: solid;
+            border-color: inherit;
+            border-bottom: none;
+            border-left-color: transparent;
+            border-right-color: transparent;
+        }
+
+        /* Responsividade */
         @media (max-width: 800px) {
             .widget .body { grid-template-columns: 1fr 1fr; }
             .btn-filtrar { grid-column: span 2; }
@@ -235,6 +313,8 @@
     </style>
 </head>
 <body data-theme="light">
+
+    <div id="chart-tooltip"></div>
 
     <div id="leftControl">
         <a href="javascript:toggleSidebar();">
@@ -426,7 +506,7 @@
     </aside>
 
     <main class="main-content">
-        <!-- WIDGET DE FILTRO - EXATAMENTE COMO NO PRIMEIRO ARQUIVO, LARGO E BAIXO -->
+        <!-- WIDGET FILTRO LARGO E BAIXO (primeiro arquivo) -->
         <div class="widget">
             <div class="title">
                 <svg class="titleIcon" viewBox="0 0 24 24"><path d="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z"/></svg>
@@ -438,8 +518,9 @@
                     <select id="idProjetos">
                         <option value="">Selecione o Projeto...</option>
                         <option value="0">36 | Demonstração</option>
-                        <option value="1">370 | POC - SES DF</option>
+                        <option value="1" selected>370 | PROVA DE CONCEITO - SES DF</option>
                         <option value="2">372 | POC - MINISTÉRIO DA EDUCAÇÃO</option>
+                        <option value="3">378 | SESI-SENAI-SP</option>
                     </select>
                 </div>
 
@@ -447,19 +528,20 @@
                     <label>Unidades</label>
                     <select id="idUnidades">
                         <option value="TODAS">TODAS</option>
-                        <option value="1">G1 - GUARDA CEILANDIA I</option>
-                        <option value="2">G5 - GUARDA SIA/DF</option>
+                        <option value="1">G1 - GUARDA CEILANDIA I - DF</option>
+                        <option value="2">G2 - GUARDA CEILANDIA II - DF</option>
+                        <option value="4">G5 - GUARDA SIA/DF</option>
                     </select>
                 </div>
 
                 <div class="formRow">
                     <label>Data Inicial</label>
-                    <input type="text" id="dataInicial" placeholder="00/00/0000">
+                    <input type="text" id="dataInicial" placeholder="01/01/2026">
                 </div>
 
                 <div class="formRow">
                     <label>Data Final</label>
-                    <input type="text" id="dataFinal" placeholder="00/00/0000">
+                    <input type="text" id="dataFinal" placeholder="25/03/2026">
                 </div>
 
                 <button class="btn-filtrar" onclick="filtrar()">Filtrar</button>
@@ -469,7 +551,58 @@
                 </div>
             </div>
         </div>
-        <!-- Conteúdo adicional pode ser inserido abaixo se necessário -->
+
+        <!-- GRID COM OS GRÁFICOS (terceiro arquivo) -->
+        <div class="dashboard-grid">
+            <div class="widget-chart">
+                <div class="title"><h6>Resumo Quantitativo</h6></div>
+                <div class="chart-wrap">
+                    <table class="sTable">
+                        <thead><tr><td style="text-align: center;">Qtd</td><td>Objeto</td><td>Status</td></tr></thead>
+                        <tbody>
+                            <tr><td style="text-align: center; font-weight:700">9.423</td><td>DOCUMENTO</td><td><span class="statsPercent">91,6%</span></td></tr>
+                            <tr><td style="text-align: center; font-weight:700">864</td><td>CAIXA</td><td><span class="statsPercent">8,4%</span></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="widget-chart">
+                <div class="title"><h6>Proporção de Acervo</h6></div>
+                <div class="chart-wrap">
+                    <svg viewBox="0 0 400 420" width="240">
+                        <g class="pizza-slice" data-tooltip="91.6% Documentos">
+                            <path d="M200,200 L200,50 A150,150 0 1,1 120,75 Z" fill="#005baa" stroke="#fff" stroke-width="2"/>
+                        </g>
+                        <g class="pizza-slice" data-tooltip="8.4% Caixas">
+                            <path d="M200,200 L120,75 A150,150 0 0,1 200,50 Z" fill="#f39200" stroke="#fff" stroke-width="2"/>
+                        </g>
+                        <g transform="translate(45, 385)">
+                            <rect width="14" height="14" fill="#005baa" rx="2"/><text x="22" y="12" font-size="14" fill="currentColor" font-weight="700">Azul: Documento</text>
+                            <rect x="155" width="14" height="14" fill="#f39200" rx="2"/><text x="177" y="12" font-size="14" fill="currentColor" font-weight="700">Laranja: Caixa</text>
+                        </g>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="widget-chart">
+                <div class="title"><h6>Indicador de Volume</h6></div>
+                <div class="chart-wrap">
+                    <svg viewBox="0 0 500 300" width="100%" style="max-width: 420px;">
+                        <line x1="130" y1="50" x2="130" y2="250" stroke="var(--cor-borda)" stroke-width="1" />
+                        <line x1="450" y1="50" x2="450" y2="250" stroke="var(--cor-borda)" stroke-width="1" stroke-dasharray="4" />
+                        <text x="130" y="270" font-size="10" fill="var(--cor-subtexto)" text-anchor="middle">0%</text>
+                        <text x="450" y="270" font-size="10" fill="var(--cor-subtexto)" text-anchor="middle">100%</text>
+                        <text x="115" y="95" font-size="12" font-weight="700" text-anchor="end" fill="currentColor">DOCUMENTO</text>
+                        <rect x="130" y="70" width="293" height="45" fill="var(--azul-sesc)" rx="4" />
+                        <text x="430" y="97" font-size="14" font-weight="800" fill="currentColor" text-anchor="start">91.6%</text>
+                        <text x="115" y="185" font-size="12" font-weight="700" text-anchor="end" fill="currentColor">CAIXA</text>
+                        <rect x="130" y="160" width="27" height="45" fill="var(--laranja-sesc)" rx="4" />
+                        <text x="165" y="187" font-size="14" font-weight="800" fill="currentColor">8.4%</text>
+                    </svg>
+                </div>
+            </div>
+        </div>
     </main>
 
     <script>
@@ -512,7 +645,7 @@
             });
         });
 
-        // Função filtrar conforme arquivo original
+        // Função filtrar
         function filtrar() {
             const projeto = document.getElementById('idProjetos').value;
             const unidade = document.getElementById('idUnidades').value;
@@ -521,7 +654,7 @@
             alert(`Filtrando resultados...\nProjeto: ${projeto || 'Todos'}\nUnidade: ${unidade}\nPeríodo: ${dataIni || 'início'} a ${dataFim || 'fim'}`);
         }
 
-        // Evento extra para pesquisa sidebar (placeholder)
+        // Evento para pesquisa sidebar
         const searchInput = document.getElementById('idTxtBuscarPorID');
         if(searchInput) {
             searchInput.addEventListener('keypress', function(e) {
@@ -532,13 +665,33 @@
             });
         }
         
-        // Pequeno detalhe: fechar dropdown ao clicar fora (melhoria)
+        // Fechar dropdown ao clicar fora
         document.addEventListener('click', function(event) {
             const dropdown = document.getElementById('userDropdown');
             const userBtn = document.querySelector('.goUser');
             if(dropdown && userBtn && !userBtn.contains(event.target) && !dropdown.contains(event.target)) {
                 dropdown.style.display = 'none';
             }
+        });
+
+        // Tooltip dinâmica para os gráficos pizza
+        const tooltip = document.getElementById('chart-tooltip');
+        document.querySelectorAll('.pizza-slice').forEach(slice => {
+            slice.addEventListener('mousemove', (e) => {
+                const text = slice.getAttribute('data-tooltip');
+                const path = slice.querySelector('path');
+                const color = path ? path.getAttribute('fill') : '#005baa';
+                if(tooltip) {
+                    tooltip.innerHTML = text;
+                    tooltip.style.backgroundColor = color;
+                    tooltip.style.opacity = '1';
+                    tooltip.style.left = (e.clientX - tooltip.offsetWidth / 2) + 'px';
+                    tooltip.style.top = (e.clientY - tooltip.offsetHeight - 15) + 'px';
+                }
+            });
+            slice.addEventListener('mouseleave', () => {
+                if(tooltip) tooltip.style.opacity = '0';
+            });
         });
     </script>
 </body>
