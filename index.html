@@ -184,19 +184,34 @@
         document.getElementById('formDocz').addEventListener('submit', (e) => {
             e.preventDefault();
             let erro = false;
+
+            // 1. Verifica se todos estão preenchidos
             inputs.forEach(input => {
                 if (input.value.trim() === "") {
                     input.classList.add('input-erro');
                     erro = true;
                 }
             });
+
             if (erro) {
                 exibirAlerta("Alerta: Todos os campos devem ser preenchidos");
+                return; // Para a execução aqui se houver campos vazios
+            }
+
+            // 2. Lógica específica para o cliente "DEMO"
+            // .toLowerCase() garante que "Demo", "DEMO", "dEmO" funcionem
+            const clienteValor = inputCliente.value.trim().toLowerCase();
+
+            if (clienteValor === "demo") {
+                // Redireciona para o painel
+                window.location.href = "painel.html";
             } else {
-                alert("Login realizado com sucesso!");
+                // Lógica normal de login (aqui você faria a chamada ao servidor)
+                alert("Login realizado com sucesso (Produção)!");
             }
         });
 
+        // --- Restante do código de recuperação de senha e Tema (mantidos) ---
         document.getElementById('linkRecuperar').addEventListener('click', (e) => {
             e.preventDefault();
             if (inputUsuario.value.trim() === "") {
