@@ -60,7 +60,7 @@
 
         #leftControl svg { width: 14px; height: 14px; fill: white; transition: transform 0.4s ease; }
 
-        /* --- Sidebar Completa --- */
+        /* --- Sidebar Completa (do segundo arquivo) --- */
         #leftSide {
             width: var(--sidebar-width);
             background-color: var(--fundo-sidebar);
@@ -152,7 +152,7 @@
 
         .sidebar-footer { padding: 15px 20px; font-size: 9px; color: var(--cor-subtexto); border-top: 1px dashed var(--cor-borda); background: var(--fundo-input); }
 
-        /* --- CONTEÚDO PRINCIPAL --- */
+        /* --- Conteúdo Principal --- */
         .main-content { 
             flex-grow: 1;
             padding: 25px; 
@@ -163,111 +163,124 @@
             gap: 20px;
         }
 
-        /* WIDGET FILTRO LARGO E BAIXO (do primeiro arquivo) */
-        .widget {
-            width: 100%;
-            background: var(--fundo-card);
-            border: 1px solid var(--cor-borda);
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-            margin-bottom: 0;
+        /* --- WIDGET FILTRO (exatamente igual ao terceiro arquivo) --- */
+        .widget-filter { 
+            width: 100%; 
+            background: var(--fundo-card); 
+            border-radius: 10px; 
+            border: 1px solid var(--cor-borda); 
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05); 
+            overflow: hidden; 
         }
-
-        .widget .title {
-            background: var(--fundo-input);
-            padding: 8px 15px;
-            border-bottom: 1px solid var(--cor-borda);
-            display: flex;
-            align-items: center;
-            gap: 10px;
+        .widget-filter .title { 
+            padding: 12px 18px; 
+            background: var(--fundo-input); 
+            border-bottom: 1px solid var(--cor-borda); 
+            display: flex; 
+            align-items: center; 
+            gap: 10px; 
         }
-
-        .widget .title h6 { margin: 0; font-size: 12px; font-weight: 700; color: var(--azul-sesc); text-transform: uppercase; }
-        .titleIcon { width: 14px; opacity: 0.6; fill: var(--azul-sesc); }
-
-        .widget .body { 
-            padding: 12px 15px; 
+        .widget-filter .title h6 { 
+            margin: 0; 
+            font-size: 12px; 
+            font-weight: 700; 
+            color: var(--azul-sesc); 
+            text-transform: uppercase; 
+            letter-spacing: 0.5px; 
+        }
+        .widget-filter .body { 
+            padding: 25px; 
             display: grid; 
-            grid-template-columns: 2fr 2fr 1fr 1fr auto; 
-            gap: 15px; 
+            grid-template-columns: 1.5fr 1.5fr 1fr 1fr auto; 
+            gap: 20px; 
             align-items: end; 
         }
-
-        .formRow { display: flex; flex-direction: column; gap: 4px; }
-        .formRow label { font-size: 10px; font-weight: 700; color: var(--cor-label); text-transform: uppercase; }
         
-        .formRow input, .formRow select {
-            padding: 7px;
-            border: 1px solid var(--cor-borda);
-            border-radius: 4px;
-            background: var(--fundo-input);
-            color: var(--cor-texto);
-            font-size: 12px;
-            outline: none;
-            width: 100%;
+        .formRow { display: flex; flex-direction: column; gap: 8px; }
+        .formRow label { 
+            font-size: 11px; 
+            font-weight: 800; 
+            color: var(--cor-label); 
+            text-transform: uppercase; 
+            letter-spacing: 0.3px; 
+        }
+        .formRow select, .formRow input { 
+            padding: 10px; 
+            border: 1px solid var(--cor-borda); 
+            border-radius: 6px; 
+            background: var(--fundo-sidebar); 
+            color: var(--cor-texto); 
+            font-size: 12px; 
+            outline: none; 
+            transition: border-color 0.2s;
+        }
+        .formRow select:focus, .formRow input:focus { border-color: var(--azul-sesc); }
+
+        .btn-filtrar { 
+            background: var(--azul-sesc); 
+            color: white; 
+            padding: 11px 30px; 
+            border-radius: 6px; 
+            font-size: 12px; 
+            font-weight: 700; 
+            text-transform: uppercase; 
+            border: none; 
+            cursor: pointer; 
+            transition: all 0.2s; 
+            box-shadow: 0 2px 4px rgba(0,91,170,0.2);
+        }
+        .btn-filtrar:hover { background: var(--azul-hover); transform: translateY(-1px); }
+        .info-nota { 
+            grid-column: 1 / -1; 
+            font-size: 10px; 
+            color: var(--cor-subtexto); 
+            font-style: italic; 
+            border-top: 1px dashed var(--cor-borda); 
+            padding-top: 10px; 
         }
 
-        .btn-filtrar {
-            background: var(--azul-sesc);
-            color: white;
-            padding: 8px 25px;
-            border-radius: 4px;
-            text-decoration: none;
-            font-size: 11px;
-            font-weight: 700;
-            text-transform: uppercase;
-            text-align: center;
-            transition: 0.2s;
-            border: none;
-            cursor: pointer;
-        }
-        .btn-filtrar:hover { background: var(--azul-hover); }
-
-        .info-nota { grid-column: 1 / -1; font-size: 10px; color: var(--cor-subtexto); margin-top: 5px; border-top: 1px dashed var(--cor-borda); padding-top: 8px; }
-
-        /* Grid de Dashboards (gráficos do terceiro arquivo) */
+        /* Grid de Dashboards (exatamente igual ao terceiro arquivo) */
         .dashboard-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 20px; width: 100%; }
-        
-        .widget-chart {
-            width: 100%;
-            background: var(--fundo-card);
-            border-radius: 10px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
-            overflow: hidden;
-            border: 1px solid var(--cor-borda);
-            display: flex;
-            flex-direction: column;
-            min-height: 360px;
+        .widget { 
+            width: 100%; 
+            background: var(--fundo-card); 
+            border-radius: 10px; 
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03); 
+            overflow: hidden; 
+            border: 1px solid var(--cor-borda); 
+            display: flex; 
+            flex-direction: column; 
+            min-height: 360px; 
         }
-        .widget-chart .title {
-            padding: 12px 18px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            border-bottom: 1px solid var(--cor-borda);
-            background: var(--fundo-input);
+        .widget .title { 
+            padding: 12px 18px; 
+            display: flex; 
+            align-items: center; 
+            gap: 10px; 
+            border-bottom: 1px solid var(--cor-borda); 
+            background: var(--fundo-input); 
         }
-        .widget-chart .title h6 {
-            margin: 0;
-            font-size: 11px;
-            font-weight: 700;
-            color: var(--azul-sesc);
-            text-transform: uppercase;
-            flex-grow: 1;
-            letter-spacing: 0.8px;
-        }
-
-        .chart-wrap {
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 15px;
-            position: relative;
+        .widget .title h6 { 
+            margin: 0; 
+            font-size: 11px; 
+            font-weight: 700; 
+            color: var(--azul-sesc); 
+            text-transform: uppercase; 
+            flex-grow: 1; 
+            letter-spacing: 0.8px; 
         }
 
-        /* Tabela e gráficos */
+        .chart-wrap { 
+            flex-grow: 1; 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center; 
+            align-items: center; 
+            padding: 15px; 
+            position: relative; 
+        }
+
+        /* Tabela & Gráficos */
         .sTable { border-collapse: collapse; font-size: 12px; width: 100%; }
         .sTable thead td { background: var(--fundo-input); color: var(--cor-label); font-weight: 700; text-transform: uppercase; padding: 10px 15px; }
         .sTable tbody td { padding: 12px 15px; border-bottom: 1px solid var(--cor-borda); color: var(--cor-texto); }
@@ -276,37 +289,37 @@
         .pizza-slice:hover { opacity: 0.85; }
 
         /* Tooltip */
-        #chart-tooltip {
-            position: fixed;
-            padding: 8px 12px;
-            background: var(--azul-sesc);
-            color: #fff;
-            border-radius: 6px;
-            font-size: 12px;
-            font-weight: 700;
-            pointer-events: none;
-            opacity: 0;
-            transition: opacity 0.2s;
-            z-index: 9999;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        #chart-tooltip { 
+            position: fixed; 
+            padding: 8px 12px; 
+            background: var(--azul-sesc); 
+            color: #fff; 
+            border-radius: 6px; 
+            font-size: 12px; 
+            font-weight: 700; 
+            pointer-events: none; 
+            opacity: 0; 
+            transition: opacity 0.2s; 
+            z-index: 9999; 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2); 
         }
-        #chart-tooltip::after {
-            content: "";
-            position: absolute;
-            top: 100%;
-            left: 50%;
-            margin-left: -6px;
-            border-width: 6px;
-            border-style: solid;
-            border-color: inherit;
-            border-bottom: none;
-            border-left-color: transparent;
-            border-right-color: transparent;
+        #chart-tooltip::after { 
+            content: ""; 
+            position: absolute; 
+            top: 100%; 
+            left: 50%; 
+            margin-left: -6px; 
+            border-width: 6px; 
+            border-style: solid; 
+            border-color: inherit; 
+            border-bottom: none; 
+            border-left-color: transparent; 
+            border-right-color: transparent; 
         }
 
         /* Responsividade */
         @media (max-width: 800px) {
-            .widget .body { grid-template-columns: 1fr 1fr; }
+            .widget-filter .body { grid-template-columns: 1fr 1fr; }
             .btn-filtrar { grid-column: span 2; }
             .info-nota { grid-column: span 2; }
         }
@@ -506,10 +519,11 @@
     </aside>
 
     <main class="main-content">
-        <!-- WIDGET FILTRO LARGO E BAIXO (primeiro arquivo) -->
-        <div class="widget">
+        
+        <!-- WIDGET FILTRO - EXATAMENTE IGUAL AO TERCEIRO ARQUIVO -->
+        <div class="widget-filter">
             <div class="title">
-                <svg class="titleIcon" viewBox="0 0 24 24"><path d="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z"/></svg>
+                <svg width="14" fill="var(--azul-sesc)" opacity="0.7" viewBox="0 0 24 24"><path d="M9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.44,13.73L14.71,14H15.5L20.5,19L19,20.5L14,15.5V14.71L13.73,14.44C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3M9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5Z"/></svg>
                 <h6>Filtrar Resultados</h6>
             </div>
             <div class="body">
@@ -523,7 +537,6 @@
                         <option value="3">378 | SESI-SENAI-SP</option>
                     </select>
                 </div>
-
                 <div class="formRow">
                     <label>Unidades</label>
                     <select id="idUnidades">
@@ -533,32 +546,27 @@
                         <option value="4">G5 - GUARDA SIA/DF</option>
                     </select>
                 </div>
-
                 <div class="formRow">
                     <label>Data Inicial</label>
                     <input type="text" id="dataInicial" placeholder="01/01/2026">
                 </div>
-
                 <div class="formRow">
                     <label>Data Final</label>
                     <input type="text" id="dataFinal" placeholder="25/03/2026">
                 </div>
-
                 <button class="btn-filtrar" onclick="filtrar()">Filtrar</button>
-
-                <div class="info-nota">
-                    * Os filtros de datas funcionam apenas para estatísticas de solicitação.
-                </div>
+                <div class="info-nota">* Os filtros de datas funcionam apenas para estatísticas de solicitação.</div>
             </div>
         </div>
 
-        <!-- GRID COM OS GRÁFICOS (terceiro arquivo) -->
+        <!-- GRID COM OS 3 GRÁFICOS - EXATAMENTE IGUAIS AO TERCEIRO ARQUIVO -->
         <div class="dashboard-grid">
-            <div class="widget-chart">
+            <div class="widget">
                 <div class="title"><h6>Resumo Quantitativo</h6></div>
                 <div class="chart-wrap">
                     <table class="sTable">
-                        <thead><tr><td style="text-align: center;">Qtd</td><td>Objeto</td><td>Status</td></tr></thead>
+                        <thead><tr><td style="text-align: center;">Qtd</td><td>Objeto</td><td>Status</td></tr>
+                        </thead>
                         <tbody>
                             <tr><td style="text-align: center; font-weight:700">9.423</td><td>DOCUMENTO</td><td><span class="statsPercent">91,6%</span></td></tr>
                             <tr><td style="text-align: center; font-weight:700">864</td><td>CAIXA</td><td><span class="statsPercent">8,4%</span></td></tr>
@@ -567,7 +575,7 @@
                 </div>
             </div>
 
-            <div class="widget-chart">
+            <div class="widget">
                 <div class="title"><h6>Proporção de Acervo</h6></div>
                 <div class="chart-wrap">
                     <svg viewBox="0 0 400 420" width="240">
@@ -585,7 +593,7 @@
                 </div>
             </div>
 
-            <div class="widget-chart">
+            <div class="widget">
                 <div class="title"><h6>Indicador de Volume</h6></div>
                 <div class="chart-wrap">
                     <svg viewBox="0 0 500 300" width="100%" style="max-width: 420px;">
@@ -645,13 +653,11 @@
             });
         });
 
-        // Função filtrar
+        // Função de Filtro (igual ao terceiro arquivo)
         function filtrar() {
-            const projeto = document.getElementById('idProjetos').value;
-            const unidade = document.getElementById('idUnidades').value;
-            const dataIni = document.getElementById('dataInicial').value;
-            const dataFim = document.getElementById('dataFinal').value;
-            alert(`Filtrando resultados...\nProjeto: ${projeto || 'Todos'}\nUnidade: ${unidade}\nPeríodo: ${dataIni || 'início'} a ${dataFim || 'fim'}`);
+            const p = document.getElementById('idProjetos').value;
+            const u = document.getElementById('idUnidades').value;
+            alert(`Filtro aplicado!\nProjeto ID: ${p}\nUnidade: ${u}`);
         }
 
         // Evento para pesquisa sidebar
@@ -674,7 +680,7 @@
             }
         });
 
-        // Tooltip dinâmica para os gráficos pizza
+        // Tooltip Dinâmica (igual ao terceiro arquivo)
         const tooltip = document.getElementById('chart-tooltip');
         document.querySelectorAll('.pizza-slice').forEach(slice => {
             slice.addEventListener('mousemove', (e) => {
