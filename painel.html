@@ -185,6 +185,7 @@
             font-weight: 600;
             cursor: pointer;
             transition: all 0.2s ease;
+            text-decoration: none;
         }
         
         .logout-btn:hover {
@@ -265,20 +266,6 @@
             width: 18px;
             height: 18px;
             fill: currentColor;
-        }
-        
-        .badge-notification {
-            position: absolute;
-            top: -6px;
-            right: -6px;
-            background: var(--laranja-sesc);
-            color: white;
-            border-radius: 20px;
-            padding: 2px 6px;
-            font-size: 10px;
-            font-weight: 700;
-            min-width: 20px;
-            text-align: center;
         }
         
         .theme-toggle-btn {
@@ -475,7 +462,7 @@
         .logo-container { 
             padding: 20px 15px; 
             text-align: center;
-            cursor: pointer;
+            cursor: default;
         }
         .logo-container img { 
             max-width: 120px; 
@@ -578,6 +565,7 @@
             color: var(--cor-texto);
             font-size: 11px;
             font-weight: 500;
+            text-decoration: none;
         }
         
         .profile-action-item:hover {
@@ -621,7 +609,7 @@
             left: 0;
         }
         
-        /* --- Widgets e Gráficos (mesmo do código anterior) --- */
+        /* --- Widgets e Gráficos --- */
         .dashboard-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 20px; width: 100%; margin-bottom: 20px; }
         .widget { 
             width: 100%; 
@@ -748,10 +736,10 @@
                 <span class="user-name">GUILHERME FARIAS MACIEL RIBEIRO</span>
             </div>
             
-            <div class="logout-btn" id="logoutBtn">
+            <a href="index.html" class="logout-btn" id="logoutBtn">
                 <svg viewBox="0 0 24 24"><path d="M16,17L21,12L16,7V11H9V13H16V17M14,2H7A2,2 0 0,0 5,4V20A2,2 0 0,0 7,22H14V20H7V4H14V2Z"/></svg>
                 <span>Logout</span>
-            </div>
+            </a>
             
             <a href="https://manualsosdocs.gitbook.io/docz-operacao" target="_blank" class="manual-btn" id="manualBtn">
                 <svg viewBox="0 0 24 24" fill="currentColor">
@@ -768,7 +756,6 @@
                     <path d="M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z"/>
                 </svg>
                 <span>Outros</span>
-                <span class="badge-notification">2</span>
             </div>
             
             <div class="theme-toggle-btn" id="themeToggleBtn">
@@ -806,7 +793,7 @@
 
     <!-- LEFT SIDEBAR -->
     <aside id="leftSide">
-        <div class="logo-container" id="logoToggle">
+        <div class="logo-container">
             <img src="https://docz.sosdocs.com.br/Docz/images/logo.png" alt="Docz">
         </div>
         <div class="sidebarSep mt0"></div>
@@ -959,14 +946,14 @@
                 </div>
             </div>
             <div class="profile-actions">
-                <div class="profile-action-item" id="sidebarMinhaConta">
+                <a href="#" class="profile-action-item" id="sidebarMinhaConta">
                     <svg viewBox="0 0 24 24"><path d="M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z"/></svg>
                     <span>Minha Conta</span>
-                </div>
-                <div class="profile-action-item" id="sidebarLogout">
+                </a>
+                <a href="index.html" class="profile-action-item" id="sidebarLogout">
                     <svg viewBox="0 0 24 24"><path d="M16,17L21,12L16,7V11H9V13H16V17M14,2H7A2,2 0 0,0 5,4V20A2,2 0 0,0 7,22H14V20H7V4H14V2Z"/></svg>
                     <span>Logout</span>
-                </div>
+                </a>
             </div>
         </div>
 
@@ -1220,15 +1207,13 @@
         
         document.getElementById('releaseNotesItem').addEventListener('click', () => {
             rightSidebar.classList.remove('open');
-            alert('Release Notes - Em desenvolvimento');
         });
         
         document.getElementById('componentesItem').addEventListener('click', () => {
             rightSidebar.classList.remove('open');
-            alert('Componentes - Em desenvolvimento');
         });
         
-        // Theme Toggle
+        // Theme Toggle (apenas pelo botão da navbar)
         const themeToggleBtn = document.getElementById('themeToggleBtn');
         function toggleTheme() {
             const body = document.body;
@@ -1237,8 +1222,7 @@
         }
         themeToggleBtn.addEventListener('click', toggleTheme);
         
-        // Logo toggle theme
-        document.getElementById('logoToggle').addEventListener('click', toggleTheme);
+        // Logo não tem mais função de tema
         
         // Expandable menus
         document.querySelectorAll('.exp').forEach(item => {
@@ -1259,32 +1243,33 @@
             });
         });
         
-        // Filter function
+        // Filter function (sem alert)
         function filtrar() {
             const p = document.getElementById('idProjetos').value;
             const u = document.getElementById('idUnidades').value;
             const di = document.getElementById('dataInicial').value;
             const df = document.getElementById('dataFinal').value;
-            alert(`Filtro aplicado!\nProjeto: ${p}\nUnidade: ${u}\nData Inicial: ${di}\nData Final: ${df}`);
+            // Apenas executa a lógica do filtro (pode ser implementada depois)
+            console.log(`Filtro aplicado: Projeto: ${p}, Unidade: ${u}, Data: ${di} a ${df}`);
         }
         
-        // Search
+        // Search (sem alert)
         const searchInput = document.getElementById('idTxtBuscarPorID');
         if(searchInput) {
             searchInput.addEventListener('keypress', function(e) {
                 if(e.key === 'Enter') {
                     e.preventDefault();
-                    alert(`Pesquisar por: ${this.value}`);
+                    console.log(`Pesquisar por: ${this.value}`);
                 }
             });
         }
         
-        // Navbar buttons actions
-        document.getElementById('demoBtn').addEventListener('click', () => alert('Modo Demo ativado'));
-        document.getElementById('userBtn').addEventListener('click', () => alert('Perfil do usuário'));
-        document.getElementById('logoutBtn').addEventListener('click', () => alert('Logout do sistema'));
-        document.getElementById('sidebarMinhaConta').addEventListener('click', () => alert('Minha Conta'));
-        document.getElementById('sidebarLogout').addEventListener('click', () => alert('Logout'));
+        // Navbar buttons (sem alert)
+        document.getElementById('demoBtn').addEventListener('click', () => {});
+        document.getElementById('userBtn').addEventListener('click', () => {});
+        document.getElementById('sidebarMinhaConta').addEventListener('click', (e) => {
+            e.preventDefault();
+        });
         
         // Tooltip
         const tooltip = document.getElementById('chart-tooltip');
